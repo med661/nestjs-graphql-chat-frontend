@@ -10,7 +10,9 @@ export const login = async (email, password) => {
     console.log(response.data);
     return response.data;
   } catch (error) {
-    throw new Error(error)
+    console.log({ error: "api error login" + error })
+    console.log({ error: error.response.data.message })
+    throw new Error(error.response.data.message)
 
   }
 

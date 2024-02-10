@@ -41,7 +41,7 @@ export const authSlice = createSlice({
       console.log({ state });
 
       state.loading = false;
-      state.user = action.payload.data;
+      state.user = action.payload.data.user.user;
       state.token = action.payload.data.token;
       state.error = null;
     },
@@ -51,7 +51,9 @@ export const authSlice = createSlice({
       console.log("loginFailed")
       console.log({ action });
       console.log({ state })
-      state.error = action.payload;
+      state.error = action.payload.message;
+      console.log({ state: state.error })
+
     },
     logout(state) {
       state.isAuthenticated = false;
@@ -77,13 +79,11 @@ export const registerAsync = (password, email, name) => async (dispatch) => {
 export const loginAsync = (email, password) => async (dispatch) => {
   try {
     dispatch(loginRequest());
-    console.log('loginAsync');
     const newuser = await login(email, password);
     await dispatch(loginSuccess({ data: { user: newuser } }));
 
   }
   catch (error) {
-    console.log({ error: "errr login" })
     dispatch(loginFailed(error));
   }
 }

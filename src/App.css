@@ -1,0 +1,13 @@
+
+.links{
+    text-decoration: none;
+    font-size: 0.75em;
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+
+
+}
+.link-auth{
+    color: #2b65e2;
+}   
