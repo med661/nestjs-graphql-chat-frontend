@@ -3,7 +3,7 @@ import { Box, Text, Input, Button, Avatar, Flex, Spacer } from '@chakra-ui/react
 import { useSelector } from 'react-redux';
 import EmojiPicker from 'emoji-picker-react';
 
-export const Discussion = ({ username, idUser, socket }) => {
+export const Discussion = ({ username, idUser, socket, status }) => {
     const [message, setMessage] = useState('');
     const [messageHistory, setMessageHistory] = useState([]);
     const currentUser = useSelector((state) => state.auth.user);
@@ -82,7 +82,7 @@ export const Discussion = ({ username, idUser, socket }) => {
                 </Text>
                 <Spacer />
                 <Text color="teal.300" fontSize="sm">
-                    Online
+                    {status}
                 </Text>
             </Flex>
 
