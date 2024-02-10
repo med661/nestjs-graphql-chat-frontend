@@ -88,7 +88,7 @@ function LoginForm() {
         </form>
         {showAlert && <AlertComponent message={errorLogin} errorType="error" />}
         <div className='links' >
-            I don't have an account? <span>&nbsp;&nbsp;</span><Link className='link-auth' to="/register">Register</Link>
+          I don't have an account? <span>&nbsp;&nbsp;</span><Link className='link-auth' to="/register">Register</Link>
         </div>
 
       </Box>
