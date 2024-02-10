@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Box, Text, Avatar, Stack, AvatarBadge, Flex, Badge } from '@chakra-ui/react';
+import { Box, Text, Avatar, Stack, AvatarBadge, Flex, Badge, Heading } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { io } from 'socket.io-client';
 import { Discussion } from './Discussion';
@@ -56,20 +56,41 @@ const OnlineUsers = ({ socket }) => {
                                 Online
                             </Badge>
                         )}
+                        {user.status === 'offline' && (
+                            <Badge ml={2} colorScheme="gray">
+                                Offline
+                            </Badge>
+                        )}
+
+
                     </Flex>
+
                 ))}
             </Stack>
             {selectedUser === null ? (
-                <Text>Select a user to start your chat</Text>
+
+
+                <Box p={8} maxW="600px" mx="auto" boxShadow="lg" borderRadius="lg" bg="white" overflow="hidden">
+                    <Heading as="h1" mb={4} fontSize="3xl" textAlign="center" color="blue.600">
+                        Welcome to Your Chat App
+                    </Heading>
+                    <Text textAlign="center" fontSize="lg" color="gray.600" mb={6}>
+                        Connect with others, share your thoughts, and start a conversation by selecting a user to chat with.
+                    </Text>
+                    <Text textAlign="center" fontSize="lg" color="gray.600" fontWeight="bold">
+                        Select a user to start your chat
+                    </Text>
+
+                </Box>
             ) : (
                 <Discussion
-                 key={selectedUser.id}
-                  username={selectedUser.username} 
-                  idUser={selectedUser.id} 
-                  socket={socket} 
-                  status={selectedUser.status}
+                    key={selectedUser.id}
+                    username={selectedUser.username}
+                    idUser={selectedUser.id}
+                    socket={socket}
+                    status={selectedUser.status}
 
-                   />
+                />
             )}
         </Flex>
     );
