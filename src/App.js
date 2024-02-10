@@ -44,9 +44,13 @@ function App() {
         <Navbar user={user} />
 
         <Routes>
-          <Route path="/login" element={<LoginForm />} />
+          <Route path="/login" element={<PublicRoute element={<LoginForm />} />} />
 
-          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/register" 
+          element={<PublicRoute element={<RegisterForm />}  ></PublicRoute>}
+          
+          
+          />
           <Route path="/dashboard" element={<PrivateRoute user={user}><Dashboard socket={socket} /></PrivateRoute>} />
           <Route path="/" element={<AboutMe />} />
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerAsync } from '../../features/auth/authSlice';
 import {
   Box,
@@ -9,16 +9,33 @@ import {
   Input,
   Stack,
 } from '@chakra-ui/react';
+import { Link, useNavigate } from 'react-router-dom';
+import AlertComponent from '../alter/Alert';
 
 const RegisterForm = () => {
+  const user = useSelector(state => state.auth.user)
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [showAlert, setShowAlert] = useState(false)
+  const errorRegister = useSelector(state => state.auth.error)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(registerAsync(password, email, name));
+    await dispatch(registerAsync(password, email, name));
+    if (errorRegister) {
+      setShowAlert(true)
+      setTimeout(() => {
+        setShowAlert(false)
+      }
+        , 3000)
+
+    } else if (user !== null) {
+      navigate('/dashboard')
+    }
+
   };
 
   return (
@@ -65,8 +82,14 @@ const RegisterForm = () => {
           <Button type="submit" colorScheme="blue">
             Register
           </Button>
+          {showAlert && <AlertComponent message={errorRegister} errorType="error" />}
+          <div className='links' >
+            I aleady have and account? <span>&nbsp;&nbsp;</span><Link className='link-auth' to="/login">login</Link>
+          </div>
+
         </Stack>
       </form>
+
     </Box>
   );
 };

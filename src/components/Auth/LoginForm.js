@@ -10,7 +10,7 @@ import {
   Stack,
   Flex
 } from '@chakra-ui/react';
-import { loginAsync } from '../../features/auth/authSlice';
+import { loginAsync, resetError } from '../../features/auth/authSlice';
 import AlertComponent from '../alter/Alert';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -26,6 +26,8 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    await dispatch(resetError())
+
     await dispatch(loginAsync(email, password))
     if (errorLogin) {
       setShowAlert(true)
@@ -33,12 +35,16 @@ function LoginForm() {
         setShowAlert(false)
       }
         , 3000)
+
     }
+
+
     else if (user !== null) {
       navigate('/dashboard')
 
 
     }
+
   };
 
   return (
@@ -86,7 +92,7 @@ function LoginForm() {
             </Button>
           </Stack>
         </form>
-        {showAlert && <AlertComponent message={errorLogin} errorType="error" />}
+        {showAlert === true && <AlertComponent message={errorLogin} errorType="error" />}
         <div className='links' >
           I don't have an account? <span>&nbsp;&nbsp;</span><Link className='link-auth' to="/register">Register</Link>
         </div>
