@@ -11,3 +11,10 @@
 .link-auth{
     color: #2b65e2;
 }   
+
+#root {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+
+}

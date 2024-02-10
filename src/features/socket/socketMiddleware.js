@@ -7,7 +7,6 @@ export const socketMiddleware = (storeAPI) => {
 
     socket.on('connect', () => {
         storeAPI.dispatch(setConnected(true));
-        //  storeAPI.dispatch(setData(''));
 
 
     });
