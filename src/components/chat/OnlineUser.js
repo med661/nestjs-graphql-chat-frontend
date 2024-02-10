@@ -62,11 +62,12 @@ const OnlineUsers = ({ socket }) => {
             {selectedUser === null ? (
                 <Text>Select a user to start your chat</Text>
             ) : (
-                <Discussion username={selectedUser.username} idUser={selectedUser.id} socket={socket} />
+                <Discussion key={selectedUser.id} username={selectedUser.username} idUser={selectedUser.id} socket={socket} />
             )}
         </Flex>
     );
 };
 
 export default OnlineUsers;
+
 
