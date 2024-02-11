@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Box,
     Flex,
@@ -15,7 +15,7 @@ import { logoutAsync } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user, socket }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [notifications, setNotifications] = useState([
@@ -26,8 +26,14 @@ const Navbar = ({ user }) => {
 
     const handleLogout = () => {
         dispatch(logoutAsync());
+        socket.disconnect()
+        socket.on('disconnect', () => {
+            console.log('disconnected')
+        })
+
         navigate('/login');
     };
+
 
     return (
         <Flex
@@ -42,7 +48,7 @@ const Navbar = ({ user }) => {
             <Box>
                 {/* Your Logo */}
                 <span role="img" aria-label="Logo">
-                    🚀 Your Logo
+                    simple-chat-app
                 </span>
             </Box>
 

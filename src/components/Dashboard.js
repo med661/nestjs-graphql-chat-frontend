@@ -4,10 +4,11 @@ import ChatComponent from './chat';
 
 const Dashboard = ({ socket }) => {
   const user = useSelector(state => state.auth.user);
+
   useEffect(() => {
 
   }
-    , [user]);
+    , [user, socket]);
 
 
 

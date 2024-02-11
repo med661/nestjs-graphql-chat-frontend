@@ -41,15 +41,15 @@ function App() {
 
 
       <Router>
-        <Navbar user={user} />
+        <Navbar user={user} socket={socket} />
 
         <Routes>
           <Route path="/login" element={<PublicRoute element={<LoginForm />} />} />
 
-          <Route path="/register" 
-          element={<PublicRoute element={<RegisterForm />}  ></PublicRoute>}
-          
-          
+          <Route path="/register"
+            element={<PublicRoute element={<RegisterForm />}  ></PublicRoute>}
+
+
           />
           <Route path="/dashboard" element={<PrivateRoute user={user}><Dashboard socket={socket} /></PrivateRoute>} />
           <Route path="/" element={<AboutMe />} />
